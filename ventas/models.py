@@ -41,7 +41,7 @@ class LineaPedido(models.Model):
         return f"Línea de pedido {self.pedido.id} - {self.producto.nombre}"
 
     def clean(self):
-        # Validamos solo si hay producto y cantidad seleccionados
+        # Validamos solo si hay producto y cantidad
         if self.producto and self.cantidad:
             if self.producto.stock < self.cantidad:
                 raise ValidationError({
@@ -49,7 +49,7 @@ class LineaPedido(models.Model):
                 })    
 
     def save(self, *args, **kwargs):
-        # Primero guardamos la línea de pedido en la base de datos
+        # guardamos la línea de pedido en la base de datos
         super().save(*args, **kwargs)
         # accede a la clave foranea (Pedido) para disparar el metodo calcular_totales
         self.pedido.calcular_totales()
