@@ -36,3 +36,12 @@ Estructura de las tablas y sus relaciones:
 | **Estado** | id, codigo, descripcion | **PK:** id |
 | **Pedido** | id, fecha_pedido, total | **PK:** id <br> **FK:** cliente_id, estado_id |
 | **LineaPedido** | id, cantidad, precio_aplicado | **PK:** id <br> **FK:** pedido_id, producto_id |
+
+## KPI: Tasa de Conversión de Oportunidades
+
+Este indicador mide la eficacia del proceso de ventas en el módulo CRM.
+
+* **Definición**: Porcentaje de oportunidades que han sido marcadas como 'Cerrada Ganada' (GAN) respecto al total de oportunidades finalizadas (Ganadas + Perdidas).
+* **Fórmula**: (Oportunidades Ganadas / (Oportunidades Ganadas + Oportunidades Perdidas)) * 100
+* **Objetivo**: Evaluar la calidad de la prospección y la eficiencia del equipo comercial.
+* **Interpretación**: Una tasa alta indica un proceso de ventas saludable; una tasa baja sugiere problemas en la fase de negociación o en la selección de clientes potenciales.

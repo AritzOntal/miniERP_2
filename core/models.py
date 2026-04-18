@@ -36,4 +36,4 @@ class Estado(models.Model):
         verbose_name_plural = "Estados de Pedido"
 
     def __str__(self):
-        return self.descripcion
+        return self.descripcion 
