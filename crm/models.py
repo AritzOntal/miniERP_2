@@ -25,13 +25,13 @@ class Oportunidad(models.Model):
     # metodos calculados
     @property
     def dias_abierta(self):
-        """Calcula cuántos días lleva la oportunidad en el pipeline."""
         if not self.fecha_creacion:
             return 0
+            # valor si es verdadero || condicion || valor si es falso
         final = self.fecha_cierre if self.fecha_cierre else timezone.now()
         return (final - self.fecha_creacion).days
 
     @property
     def esta_cerrada(self):
-        """Devuelve True si está ganada o perdida."""
+        # devuelve si dentro de etapa estn los campos GANADA o PERDIDA. Si es cualquier otra ser a False
         return self.etapa in (self.Etapa.GANADA, self.Etapa.PERDIDA)
