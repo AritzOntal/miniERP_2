@@ -1,6 +1,7 @@
 from django.db import models
 from core.models import Cliente, Producto, Estado
 from decimal import Decimal
+from django.core.exceptions import ValidationError
 
 class Pedido(models.Model):
     fecha_pedido = models.DateTimeField(auto_now_add=True)
@@ -38,6 +39,14 @@ class LineaPedido(models.Model):
 
     def __str__(self):
         return f"Línea de pedido {self.pedido.id} - {self.producto.nombre}"
+
+    def clean(self):
+        # Validamos solo si hay producto y cantidad seleccionados
+        if self.producto and self.cantidad:
+            if self.producto.stock < self.cantidad:
+                raise ValidationError({
+                    'cantidad': f"No puedes vender {self.cantidad} unidades. Solo quedan {self.producto.stock} en stock."
+                })    
 
     def save(self, *args, **kwargs):
         # Primero guardamos la línea de pedido en la base de datos

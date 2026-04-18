@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator
 
 class Cliente(models.Model):
     nombre = models.CharField(max_length=150)
@@ -18,9 +19,10 @@ class Producto(models.Model):
     sku = models.CharField(max_length=50, unique=True)
     precio_base = models.DecimalField(max_digits=10, decimal_places=2)
     iva = models.DecimalField(max_digits=5, decimal_places=2, default=21.00)
+    stock = models.IntegerField(default=0, validators=[MinValueValidator(0)])
 
     def __str__(self):
-        return f"[{self.sku}] {self.nombre}"
+        return f"[{self.sku}] {self.nombre} - Stock: {self.stock}"
 
 class Estado(models.Model):
     ESTADOS_CHOICES = [
